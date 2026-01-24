@@ -1,0 +1,55 @@
+Intuition
+The goal is to remove all occurrences of a given value val from the array in-place and return the count of remaining elements.
+Since the order of elements does not matter and no extra space is allowed, a two-pointer approach is a natural fit. We can overwrite unwanted elements while scanning the array.
+
+Approach
+I maintain two pointers:
+
+left: iterates through every element in the array.
+
+right: tracks the position where the next valid (non-val) element should be placed.
+
+Steps:
+
+Handle small edge cases such as empty arrays or arrays of size 1 where the single element equals val.
+
+Traverse the array using left.
+
+Whenever nums[left] is not equal to val, copy it to nums[right] and increment right.
+
+After traversal, right represents the count of elements not equal to val.
+
+The first right elements of nums will contain the desired result.
+
+Complexity
+Time complexity:
+O(n)
+
+Space complexity:
+O(1)
+
+Code
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        
+        if(nums.length<=2){
+           if(nums.length==0){
+            return 0;
+           }
+           else if ((nums.length==1) && (nums[0]==val))
+           {
+            return 0;
+           }
+          
+        }
+        int left =0;
+        int right =0;
+        for(left=0; left<nums.length;left++){
+            if(nums[left] !=val){
+            nums[right]= nums[left];
+            right +=1;
+            }
+        }
+        return right;
+    }
+}
