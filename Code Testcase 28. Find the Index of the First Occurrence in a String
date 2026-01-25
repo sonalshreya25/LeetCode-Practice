@@ -1,0 +1,26 @@
+Intuition
+To find the first occurrence of one string (needle) inside another string (haystack), Java already provides a built-in method that efficiently handles this operation. Using it avoids unnecessary manual comparisons and keeps the solution concise.
+
+Approach
+We use Java’s String.indexOf() method:
+
+indexOf(needle) returns the index of the first occurrence of needle in haystack.
+
+If needle does not exist in haystack, it automatically returns -1.
+
+This directly satisfies the problem requirements, so we simply return the result.
+
+Complexity
+Time complexity:
+O(n)
+
+Space complexity:
+O(1)
+
+Code
+class Solution {
+    public int strStr(String haystack, String needle) {
+        int res= haystack.indexOf(needle);
+        return res;
+    }
+}
