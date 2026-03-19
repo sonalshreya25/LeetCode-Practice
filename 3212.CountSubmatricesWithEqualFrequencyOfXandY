@@ -1,0 +1,80 @@
+/*3212.count-submatrices-with-equal-frequency-of-x-and-y */
+public class Solution {
+
+    public int numberOfSubmatrices(char[][] grid) {
+
+        int[] countX = new int[grid[0].length];
+        int[] countY = new int[grid[0].length];
+
+        int num = 0;
+
+        for (int i = 0; i < grid.length; i++) {
+
+            int x = 0;
+            int y = 0;
+
+            for (int j = 0; j < grid[0].length; j++) {
+
+                if (grid[i][j] == 'X') {
+                    x++;
+                }
+
+                if (grid[i][j] == 'Y') {
+                    y++;
+                }
+
+                countX[j] += x;
+                countY[j] += y;
+
+                if (countX[j] >= 1 && countX[j] == countY[j]) {
+                    num++;
+                }
+            }
+        }
+
+        return num;
+    }
+}
+
+
+    /*
+Explanation
+    Intuition:
+    We need to count submatrices that contain at least one 'X' and have an equal number of 'X' and 'Y'.
+
+    A brute-force approach would check every possible submatrix, but that would be too slow.
+    Instead, for each cell (i, j), we track how many 'X' and 'Y' appear in the rectangle 
+    from the top-left corner (0, 0) to (i, j).
+
+    If:
+    - count of 'X' >= 1
+    - count of 'X' == count of 'Y'
+    then that prefix submatrix is valid.
+
+    To compute efficiently, we maintain column-wise prefix counts.
+    */
+
+    /*
+    Approach:
+    - Use two arrays:
+        countX[j] = total 'X' count till column j
+        countY[j] = total 'Y' count till column j
+
+    - Traverse grid row by row
+    - For each row:
+        maintain running counts x and y
+
+    - Update:
+        countX[j] += x
+        countY[j] += y
+
+    - If:
+        countX[j] >= 1 AND countX[j] == countY[j]
+      then increment result
+    */
+
+    /*
+    Complexity:
+    Time: O(m * n)
+    Space: O(n)
+    */
