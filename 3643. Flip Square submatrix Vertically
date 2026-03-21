@@ -1,0 +1,28 @@
+class Solution {
+
+    public int[][] reverseSubmatrix(int[][] grid, int x, int y, int k) {
+
+        // Loop only through half the rows of the k x k submatrix
+        // Because each swap fixes two rows (top ↔ bottom)
+        for (int i = 0; i < k / 2; i++) {
+
+            // Calculate the current top row index
+            int top = x + i;
+
+            // Calculate the corresponding bottom row index
+            int bottom = x + k - 1 - i;
+
+            // Loop through all columns within the submatrix
+            for (int j = y; j < y + k; j++) {
+
+                // Swap elements column by column between top and bottom rows
+                int temp = grid[top][j];
+                grid[top][j] = grid[bottom][j];
+                grid[bottom][j] = temp;
+            }
+        }
+
+        // Return the updated matrix after flipping the submatrix
+        return grid;
+    }
+}
